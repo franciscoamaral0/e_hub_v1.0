@@ -3,11 +3,30 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+import PropTypes from "prop-types";
+import { ThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { ToastyProvider } from "../src/contexts/Toasty";
+import theme from "../src/theme";
+
+
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Router>
+
+  <ThemeProvider theme={theme}>
+    <CssBaseline/>
     <App />
-  </React.StrictMode>,
+  </ThemeProvider>
+  </Router>
+  ,
   document.getElementById('root')
 );
 
