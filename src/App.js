@@ -11,11 +11,15 @@ import Dashboard from "./views/user/dashboard";
 import Publish from '../src/views/user/publish/index'
 import Signup from "./views/signup";
 import Login from '../src/views/login/index'
+import Product from "./views/product";
 
 function App() {
   return (
     <>
     <Switch>
+      <Route path='/product'>
+        <Product/>
+      </Route>
       <Route path='/login'>
         <Login/>
       </Route>

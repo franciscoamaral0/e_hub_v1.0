@@ -14,12 +14,11 @@ import { Alert } from '@material-ui/lab'
 
 const Signin = () => {
   const classes = useStyles()
-  const {setToasty} = useToasty()
   const router = useHistory()
   
   
   const handleFormSubmit = async (values) =>{
-  
+          router.push('/myaccount')
   
   }
 
@@ -78,6 +77,7 @@ const Signin = () => {
                       </FormHelperText>
                     </FormControl>
 
+                      
                     {
                       isSubmitting 
                       ? (<CircularProgress className={classes.loading}/>)
@@ -92,7 +92,6 @@ const Signin = () => {
                         Entrar
                       </Button>)
                     }
-
             
 
                   </form>
