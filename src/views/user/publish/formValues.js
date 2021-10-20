@@ -14,8 +14,8 @@ import * as yup from "yup";
     name: yup.string().required('Campo Obrigatório'),
     email: yup.string().email('Digite um e-mail válido').required('Campo Obrigatório'),
     phone: yup.number().required('Campo Obrigatório'),
-    files: yup.array().min(2, 'Envie pelo menos duas fotos').required('Campo Obrigatório')
-
+    files: yup.array().min(2, 'Envie pelo menos duas fotos').required('Campo Obrigatório'),
+    manufacturer: yup.string().required('Campo Obrigatório')
     
   });
 
@@ -29,6 +29,8 @@ import * as yup from "yup";
     email: '',
     phone: '',
     files: [],
+    used: false,
+    manufacturer: ''
   }
 
   export {validationSchema, initialValues}

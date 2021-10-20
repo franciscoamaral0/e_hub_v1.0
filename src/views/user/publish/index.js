@@ -13,27 +13,31 @@ import {
   MenuItem,
   FormHelperText,
   Input,
+  FormControlLabel,
+  Checkbox
 } from "@material-ui/core";
 
 import useStyles from "./publish.styles";
 
 import TemplateDefault from "../../../templates/default";
 import { initialValues, validationSchema } from "./formValues";
-import FileUpload from "../../../components/FileUpload";
+import FileUpload from '../../../components/FileUpload/index'
+import { useDropzone } from "react-dropzone";
 
 const Publish = () => {
   const classes = useStyles();
 
   // const [files, setFiles] = useState([]);
+  const handleSubmitForm = (values) =>{
+    console.log(values)
+  }
 
   return (
     <TemplateDefault>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
+        onSubmit={handleSubmitForm}
       >
         {({
           touched,
@@ -81,7 +85,20 @@ const Publish = () => {
 
                   <br />
                   <br />
+                  <FormControl error={errors.manufacturer && touched.manufacturer} fullWidth>
+                    <InputLabel className={classes.inputLabel}>
+                      Fabricante*
+                    </InputLabel>
+                    <Input
+                      name="manufacturer"
+                      value={values.manufacturer}
+                      onChange={handleChange}
+                    />
+                    <FormHelperText>{errors.manufacturer}</FormHelperText>
+                  </FormControl>
 
+                  <br />
+                  <br />
                   <FormControl
                     error={errors.category && touched.category}
                     fullWidth
@@ -168,6 +185,11 @@ const Publish = () => {
 
               <Container maxWidth="md" className={classes.boxContainer}>
                 <Box className={classes.box}>
+                  
+
+
+
+
                   <FormControl error={errors.price && touched.price} fullWidth>
                     <InputLabel className={classes.inputLabel}>
                       Preço*
@@ -185,6 +207,12 @@ const Publish = () => {
                       {errors.price && touched.price ? errors.price : null}
                     </FormHelperText>
                   </FormControl>
+
+
+                  <FormControlLabel
+                    control={<Checkbox checked={values.used} onChange={handleChange} name="used"  color='primary'/>}
+                    label="Produto Usado?"
+                  />
                 </Box>
               </Container>
 
