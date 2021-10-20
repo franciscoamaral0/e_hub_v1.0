@@ -12,29 +12,36 @@ import Publish from '../src/views/user/publish/index'
 import Signup from "./views/signup";
 import Login from '../src/views/login/index'
 import Product from "./views/product";
+import Example from "./components/LoadingPage";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
     <>
     <Switch>
-      <Route path='/product'>
-        <Product/>
+      <Route path='/example'>
+        <Example type={'spinningBubbles'} color={'#000000'}/>
       </Route>
-      <Route path='/login'>
+      <Route exact path='/login'>
         <Login/>
       </Route>
-      <Route path='/signup'>
+      <Route exact path='/signup'>
         <Signup/>
       </Route>
-      <Route path='/myaccount/publish'>
-        <Publish/>
-      </Route>
-      <Route path='/myaccount'>
-        <Dashboard/>
-      </Route>
-      <Route path='/'>
+      <Route exact path='/'>
         <Home/>
       </Route>
+    <PrivateRoute>
+      <Route exact path='/product'>
+        <Product/>
+      </Route>
+      <Route exact path='/myaccount'>
+        <Dashboard/>
+      </Route>
+      <Route exact path='/myaccount/publish'>
+        <Publish/>
+      </Route>
+      </PrivateRoute>
     </Switch>
     </>
   );

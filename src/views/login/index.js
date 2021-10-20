@@ -5,20 +5,51 @@ import { useHistory } from 'react-router'
 
 
 import TemplateDefault from '../../templates/default'
-import useToasty from '../../../src/contexts/Toasty'
+import useToasty from '../../contexts/Toasty'
 import useStyles from './login.styles'
 import { initialValues, validationSchema } from './formValues'
 import { Alert } from '@material-ui/lab'
+import Api from '../../api/api.config'
 
 
 
 const Signin = () => {
   const classes = useStyles()
+  const {setToasty} = useToasty()
   const router = useHistory()
   
+  const handlerSucess = () => {
+    setToasty({
+      open:true,
+      severity:'success',
+      text: 'Login realizado com sucesso'
+    })
+  }
+  const handlerError = () => {
+    setToasty({
+      open:true,
+      severity:'error',
+      text: 'Login ou senha incorreto.'
+    })
+  }
   
   const handleFormSubmit = async (values) =>{
-          router.push('/myaccount')
+    try {
+      const result = await  Api.post('/login', values)
+      localStorage.setItem('token', result.data.token)
+        console.log(result)
+      handlerSucess()
+      window.location = '/myaccount'
+      } catch (error) {
+        handlerError()
+        
+      }
+      
+      
+        
+      // router.push('/myaccount')
+
+      
   
   }
 

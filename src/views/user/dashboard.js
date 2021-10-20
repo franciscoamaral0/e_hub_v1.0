@@ -3,27 +3,72 @@ import { makeStyles } from '@material-ui/core'
 
 import TemplateDefault from  '../../templates/default'
 import Card from '../../components/Card'
-
+import Api from '../../api/api.config'
+import { useEffect, useState } from 'react'
+import { useHistory } from 'react-router'
+import useToasty from '../../contexts/Toasty'
+import Example from '../../components/LoadingPage'
 
 const useStyles = makeStyles((theme) =>({
   
   buttonAdd: {
     margin: '30px auto',
     display: 'block',
-
+    
   },
-
+  
   gridContainer:{
     marginTop: 10
   }
-
+  
 }))
+
 
 const Dashboard = () => {
   const classes = useStyles()
+  const router = useHistory()
+  const {setToasty} = useToasty()
+
+  const handleSucess = () =>{
+    setToasty({
+      open:true,
+      severity:'success',
+      text: 'Usuário Logado'
+    })
+  }
+
+  const handleError = () => {
+    setToasty({
+      open:true,
+      severity:'error',
+      text: 'Tente logar novamente'
+    })
+    
+  }
+    
+  
+  
+  
+  const getAllAds = async () => {
+    try {
+      const result = await Api.get('/ad-sale/all')
+      console.log(result.status)
+      
+    } catch (error) {
+      console.log(error.message)
+      handleError()
+      
+      router.push('/login')
+    }
+  }
+  
+  useEffect(()=> {
+    getAllAds()
+  }, [])
 
   return (
-    <TemplateDefault>
+    <>
+     <TemplateDefault>
       <Container maxWidth='sm' >
         <Typography component='h1' variant='h2' align='center' >
           Meus Anuncios
@@ -124,6 +169,10 @@ const Dashboard = () => {
         </Grid>
       </Container>
     </TemplateDefault>
+    
+        
+    
+  </>
   )
 
 }

@@ -13,7 +13,7 @@ import {
 import PropTypes from "prop-types";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { ToastyProvider } from "../src/contexts/Toasty";
+import { ToastyProvider } from '../src/contexts/Toasty';
 import theme from "../src/theme";
 
 
@@ -21,10 +21,12 @@ import theme from "../src/theme";
 ReactDOM.render(
   <Router>
 
-  <ThemeProvider theme={theme}>
-    <CssBaseline/>
-    <App />
-  </ThemeProvider>
+    <ToastyProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline/>
+          <App />
+      </ThemeProvider>
+    </ToastyProvider>
   </Router>
   ,
   document.getElementById('root')
