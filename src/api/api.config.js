@@ -5,7 +5,7 @@ const token = localStorage.getItem('token')
 
 const Api = axios.create({
   baseURL: 'https://e-hub-iron.herokuapp.com',
-  headers: {'Authorization': `Bearer ${token}`}
+  headers: {'Authorization': `Bearer ${token}`},
 })
 
 

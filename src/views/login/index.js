@@ -35,16 +35,19 @@ const Signin = () => {
   
   const handleFormSubmit = async (values) =>{
     try {
-      const result = await  Api.post('/login', values)
+      const result = await Api.post('/login', values)
+      console.log(result)
       localStorage.setItem('token', result.data.token)
-        console.log(result)
+      localStorage.setItem('userId', result.data.user.id)
       handlerSucess()
       window.location = '/myaccount'
       } catch (error) {
+        if(error.response.status === 401) {
+          localStorage.removeItem('token')
+        }
         handlerError()
         
       }
-      
       
         
       // router.push('/myaccount')
