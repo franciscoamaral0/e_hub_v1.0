@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import useToasty from '../../contexts/Toasty'
 import Example from '../../components/LoadingPage'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) =>({
   
@@ -68,14 +69,16 @@ const Dashboard = () => {
 
   return (
     <>
-     <TemplateDefault>
+    <TemplateDefault>
       <Container maxWidth='sm' >
         <Typography component='h1' variant='h2' align='center' >
           Meus Anuncios
         </Typography>
-          <Button variant='contained' color='primary' className={classes.buttonAdd}>
-            Publicar Novo Anúncio 
-          </Button>
+          <Link to='/myaccount/publish'>
+            <Button variant='contained' color='primary' className={classes.buttonAdd}>
+              Publicar Novo Anúncio 
+            </Button>
+          </Link>
       </Container>
 
       <Container maxWidth='md' className={classes.gridContainer} >
