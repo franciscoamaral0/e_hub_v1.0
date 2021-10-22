@@ -1,9 +1,9 @@
 import { Button, Container, Typography, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+// import { useHistory } from "react-router";
 import useToasty from "../../contexts/Toasty";
-import Example from "../../components/LoadingPage";
+
 import { Link } from "react-router-dom";
 
 import TemplateDefault from "../../templates/default";
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Dashboard = () => {
   const classes = useStyles();
-  const router = useHistory();
+  // const router = useHistory();
   const { setToasty } = useToasty();
   const [ads, setAds] = useState([]);
 

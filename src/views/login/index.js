@@ -10,57 +10,19 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 import { Formik } from "formik";
-import axios from "axios";
-import { useHistory } from "react-router";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import TemplateDefault from "../../templates/default";
-import useToasty from "../../contexts/Toasty";
 import useStyles from "./login.styles";
 import { initialValues, validationSchema } from "./formValues";
-import { Alert } from "@material-ui/lab";
-import Api from "../../api/api.config";
+
 import { Context } from "../../contexts/AuthContext";
 
 const Signin = () => {
-  const classes = useStyles();
-  const { setToasty } = useToasty();
-  const router = useHistory();
-  const { authenticated, handleLogin } = useContext(Context);
+  const classes = useStyles();;
+  const { handleLogin } = useContext(Context);
 
-  // const handlerSucess = () => {
-  //   setToasty({
-  //     open:true,
-  //     severity:'success',
-  //     text: 'Login realizado com sucesso'
-  //   })
-  // }
-  // const handlerError = () => {
-  //   setToasty({
-  //     open:true,
-  //     severity:'error',
-  //     text: 'Login ou senha incorreto.'
-  //   })
-  // }
-
-  // const handleFormSubmit = async (values) =>{
-  //   try {
-  //     const result = await Api.post('/login', values)
-  //     console.log(result)
-  //     localStorage.setItem('token', result.data.token)
-  //     localStorage.setItem('userId', result.data.user.id)
-  //     handlerSucess()
-  //     window.location = '/myaccount'
-  //     // router.push('/myaccount')
-  //     } catch (error) {
-  //       if(error.response.status === 401) {
-  //         localStorage.removeItem('token')
-  //       }
-  //       handlerError()
-
-  //     }
-  //   }
 
   return (
     <TemplateDefault>

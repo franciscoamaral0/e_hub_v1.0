@@ -1,9 +1,8 @@
 
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
-  Link,
+  
   Redirect
 } from "react-router-dom";
 
@@ -14,7 +13,6 @@ import Signup from "./views/signup";
 import Login from '../src/views/login/index'
 import Product from "./views/product";
 import Example from "./components/LoadingPage";
-import PrivateRoute from "./components/PrivateRoute";
 
 import {AuthProvider, Context} from './contexts/AuthContext'
 import { useContext } from "react";
