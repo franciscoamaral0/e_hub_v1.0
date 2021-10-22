@@ -17,16 +17,18 @@ import {
   DialogActions
 
 } from "@material-ui/core";
-
-import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
-import { useEffect, useState } from "react";
+
+import { Link } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useHistory } from 'react-router'
+
 import Logo from "../eHub_logo-removebg-preview.png";
 import Api from "../api/api.config";
 import useToasty from "../contexts/Toasty";
-import { useHistory } from 'react-router'
+import {Context} from '../contexts/AuthContext'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -51,7 +53,7 @@ const Header = () => {
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const {setToasty} = useToasty()
   const router = useHistory()
-
+  const {handleConfirmLogout} =  useContext(Context)
 
   const handleCloseModal = () => setOpenConfirmModal(false);
   const openUserMenu = Boolean(anchorUserMenu);
@@ -68,10 +70,10 @@ const Header = () => {
 
   handleDataUser();
 
-  const handleConfirmLogout = () => {
-    localStorage.clear()
-    window.location = '/'
-  }
+  // const handleConfirmLogout = () => {
+  //   localStorage.clear()
+  //   window.location = '/'
+  // }
     
       
   const handleLogout = () => {

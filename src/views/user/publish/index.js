@@ -23,13 +23,32 @@ import TemplateDefault from "../../../templates/default";
 import { initialValues, validationSchema } from "./formValues";
 import FileUpload from '../../../components/FileUpload/index'
 import { useDropzone } from "react-dropzone";
+import axios from "axios";
+import Api from "../../../api/api.config";
 
 const Publish = () => {
   const classes = useStyles();
 
   // const [files, setFiles] = useState([]);
-  const handleSubmitForm = (values) =>{
-    console.log(values)
+  
+  
+  
+
+
+  const handleSubmitForm = async (values) =>{
+    const filesData = new FormData()
+    for(let key in values){
+      filesData.append(key, values[key])
+    }
+    filesData.delete('files')
+    values.files.forEach((element) => {
+      filesData.append('files', element)
+    })
+    console.log('teste', filesData.getAll('files'))
+    const send = await Api.post('/ad-sale/new', filesData)
+    console.log(send)
+    
+    
   }
 
   return (

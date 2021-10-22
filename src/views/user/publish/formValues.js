@@ -30,7 +30,8 @@ import * as yup from "yup";
     phone: '',
     files: [],
     used: false,
-    manufacturer: ''
+    manufacturer: '',
   }
+
 
   export {validationSchema, initialValues}

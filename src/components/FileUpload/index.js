@@ -3,7 +3,7 @@ import {
   Typography,
   IconButton,
 } from "@material-ui/core";
-
+ import {useState} from 'react'
 
 import { useDropzone } from "react-dropzone";
 import { DeleteForever } from "@material-ui/icons";
@@ -12,9 +12,11 @@ import useStyle from "./FileUpload.styles";
 
 const FileUpload = ({files, errors, touched, setFieldValue}) => {
   const classes= useStyle()
+  
 
-
-
+  const filesData = new FormData()
+  filesData.append('files', files[0])
+  
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFile) => {

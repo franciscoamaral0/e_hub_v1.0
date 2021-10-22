@@ -25,7 +25,14 @@ const useStyles = makeStyles((theme) =>({
   },
   errorMessage:{
     margin: '20px 0'
-  }
+  },
+  signupLink: {
+    textDecoration: 'none',
+    paddingTop: 10,
+    '&:hover':{
+      fontSize: 20
+    }
+  },
 
 }))
 
