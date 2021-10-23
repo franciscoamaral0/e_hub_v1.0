@@ -16,6 +16,7 @@ import Example from "./components/LoadingPage";
 
 import {AuthProvider, Context} from './contexts/AuthContext'
 import { useContext } from "react";
+import EditPublish from "./views/user/publish/editPublish";
 
 
 function CustomRoute({isPrivate, ...rest}){
@@ -46,6 +47,7 @@ function App() {
         <CustomRoute exact path='/product/:id' component={Product}/>
         <CustomRoute exact isPrivate path='/myaccount' component={Dashboard}/>
         <CustomRoute exact isPrivate path='/myaccount/publish' component={Publish}/>
+        <CustomRoute exact isPrivate path='/edit/:id' component={EditPublish}/>
       </Switch>
     </AuthProvider>
     </>

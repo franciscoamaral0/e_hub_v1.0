@@ -28,16 +28,56 @@ import FileUpload from '../../../components/FileUpload/index'
 // import axios from "axios";
 import Api from "../../../api/api.config";
 import useToasty from "../../../contexts/Toasty";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-const EditPublish = ({id}) => {
+const EditPublish = ({props}) => {
   const router = useHistory()
   const classes = useStyles();
   const setToasty = useToasty()
-  // const [files, setFiles] = useState([]);
-  
+  const {id} = useParams()
+  const [formValues, setFormValues] = useState(null)
   
   
 
+
+  const handleSearchAd = async () =>{
+    
+    try {
+      const result = await  Api.get('/ad-sale/my/search',{
+        params: {
+          id
+       }}
+      )
+      const savedValues = {
+        title: result.data.title,
+        category: result.data.category,
+        description: result.data.description,
+        price: result.data.price,
+        name: result.data.name, 
+        email: result.data.email,
+        phone: result.data.phone,
+        files: result.data.files,
+        used: result.data.used,
+        manufacturer: result.data.manufacturer,
+      }
+      setFormValues(savedValues)
+      
+    } catch (error) {
+      setToasty({
+        open: true,
+        severity: 'error',
+        text: 'Erro ao editar anúncio!'
+      })
+      router.push('/myaccount')
+    }
+  }
+
+  // 
+
+  useEffect(() => {
+    handleSearchAd()
+  }, [])
 
   const handleSubmitForm = async (values) =>{
       try {
@@ -50,7 +90,13 @@ const EditPublish = ({id}) => {
           filesData.append('files', element)
         })
         console.log('teste', filesData.getAll('files'))
-        const send = await Api.post('/ad-sale/new', filesData)
+        console.log('teste', filesData.getAll('title'))
+        
+        const send = await Api.put('/ad-sale/my/edit', filesData, {
+          params: {
+            id: id
+        }})
+        console.log(filesData)
         console.log(send)
         router.push('/myaccount')
           setToasty({
@@ -68,15 +114,19 @@ const EditPublish = ({id}) => {
     
     
   }
+  
+  
 
   return (
     <TemplateDefault>
       <Formik
-        initialValues={initialValues}
+        initialValues={formValues || initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmitForm}
+        enableReinitialize
       >
         {({
+          
           touched,
           values,
           errors,

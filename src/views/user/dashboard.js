@@ -69,7 +69,7 @@ const Dashboard = () => {
       text: 'Erro ao apagar anúncio, tente novamente!'
     })
   }
-  console.log(ads);
+  
 
   const getAllAds = async () => {
     try {
@@ -87,7 +87,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getAllAds();
-  }, [ads]);
+  }, []);
 
   return (
     <>
@@ -165,7 +165,7 @@ const Dashboard = () => {
                   subtitle={formatCurrency(element.price)}
                   isButton={
                     <>
-                    <Link to= {`/edit/${element.id}`}>
+                    <Link to= {`/edit/${element._id}`}>
                       <Button size="small" color="primary">
                         Editar
                       </Button>

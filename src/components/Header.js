@@ -57,9 +57,9 @@ const Header = () => {
   const handleCloseModal = () => setOpenConfirmModal(false);
   const openUserMenu = Boolean(anchorUserMenu);
 
-  
+  console.log('teste header')
   const userId = localStorage.getItem("userId");
-  console.log(userId);
+
 
   const handleDataUser = async () => {
     const result = await Api.get("/my-account");
