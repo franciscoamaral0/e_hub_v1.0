@@ -29,7 +29,7 @@ import FileUpload from '../../../components/FileUpload/index'
 import Api from "../../../api/api.config";
 import useToasty from "../../../contexts/Toasty";
 
-const Publish = () => {
+const EditPublish = ({id}) => {
   const router = useHistory()
   const classes = useStyles();
   const setToasty = useToasty()
@@ -317,4 +317,4 @@ const Publish = () => {
   );
 };
 
-export default Publish;
+export default EditPublish;

@@ -6,28 +6,25 @@ import {
   Button,
   IconButton,
   Container,
-  Avatar,
   Menu,
   MenuItem,
   Divider,
   Dialog,
   DialogTitle,
-  DialogContent,
-  DialogContentText,
   DialogActions
 
 } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+
 import { makeStyles } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
 
 import { Link } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
-import { useHistory } from 'react-router'
+import {useState, useContext } from "react";
+
 
 import Logo from "../eHub_logo-removebg-preview.png";
 import Api from "../api/api.config";
-import useToasty from "../contexts/Toasty";
+
 import {Context} from '../contexts/AuthContext'
 
 
@@ -45,14 +42,16 @@ const useStyles = makeStyles((theme) => ({
   divider: {
     margin: "14px 0",
   },
+  linkToasty: {
+    textDecoration: 'none',
+    color: theme.palette.primary.main
+  }
 }));
 const Header = () => {
   const classes = useStyles();
   const [anchorUserMenu, setAnchorUserMenu] = useState(false);
   const [name, setName] = useState();
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
-  const {setToasty} = useToasty()
-  const router = useHistory()
   const {handleConfirmLogout} =  useContext(Context)
 
   const handleCloseModal = () => setOpenConfirmModal(false);
@@ -99,11 +98,13 @@ const Header = () => {
         <Container maxWidth="lg">
           <Toolbar>
             
-            {/* <Link href='/' passHref> add route to / */}
+            
             <Box variant="h6" className={classes.title}>
+            <Link to='/'>
               <img src={Logo} alt="logo" width={110} height={50} />
+            </Link>
             </Box>
-            {/* </Link>   */}
+            
             <Box className={classes.responsiveHeader}>
               <Link
                 to={name ? "/myaccount/publish" : "/login"}
@@ -141,9 +142,9 @@ const Header = () => {
                 horizontal: "right",
               }}
             >
-              <MenuItem>Dashboard</MenuItem>
-              <MenuItem>Meus Anuncios</MenuItem>
-              <MenuItem>Publicar Novo Anuncio</MenuItem>
+
+            <Link className={classes.linkToasty} to='/myaccount'> <MenuItem>Meus Anuncios</MenuItem></Link>
+            <Link className={classes.linkToasty} to='/myaccount/publish'> <MenuItem>Publicar Novo Anuncio</MenuItem> </Link>
               <Divider className={classes.divider} />
               <MenuItem onClick={handleLogout}>Sair</MenuItem>
             </Menu>

@@ -40,9 +40,9 @@ function App() {
     <>
     <AuthProvider>
       <Switch>
+        <CustomRoute exact path='/' component={Home}/>
         <CustomRoute exact path='/login' component={Login}/>
         <CustomRoute exact path='/signup' component={Signup}/>
-        <CustomRoute exact path='/' component={Home}/>
         <CustomRoute exact path='/product/:id' component={Product}/>
         <CustomRoute exact isPrivate path='/myaccount' component={Dashboard}/>
         <CustomRoute exact isPrivate path='/myaccount/publish' component={Publish}/>
@@ -53,29 +53,3 @@ function App() {
 }
 
 export default App;
-
-
-
-  // <Route path='/example'>
-  //         <Example type={'spinningBubbles'} color={'#000000'}/>
-  //       </Route>
-  //       <Route exact path='/login'>
-  //         <Login/>
-  //       </Route>
-  //       <Route exact path='/signup'>
-  //         <Signup/>
-  //       </Route>
-  //       <Route exact path='/'>
-  //         <Home/>
-  //       </Route>
-  //     <PrivateRoute>
-  //       <Route exact path='/product'>
-  //         <Product/>
-  //       </Route>
-  //       <Route exact path='/myaccount'>
-  //         <Dashboard/>
-  //       </Route>
-  //       <Route exact path='/myaccount/publish'>
-  //         <Publish/>
-  //       </Route>
-  //       </PrivateRoute>

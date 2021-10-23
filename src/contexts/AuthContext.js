@@ -17,7 +17,7 @@ function AuthProvider ({children}) {
     const token = localStorage.getItem('token')
 
     if(token){
-      Api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`
+      Api.defaults.headers.Authorization = `Bearer ${(token)}`
       setAuthenticated(true)
     }
 
@@ -29,8 +29,8 @@ function AuthProvider ({children}) {
       const result = await Api.post('/login', values)
         const token = result.data.token
         const userId = result.data.user.id
-        localStorage.setItem('token', JSON.stringify(token))
-        localStorage.setItem('userId', JSON.stringify(userId))
+        localStorage.setItem('token', token)
+        localStorage.setItem('userId', userId)
         Api.defaults.headers.Authorization = `Bearer ${token}`
         setAuthenticated(true)
         router.push('/myaccount')

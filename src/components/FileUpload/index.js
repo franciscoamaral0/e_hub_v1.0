@@ -3,7 +3,6 @@ import {
   Typography,
   IconButton,
 } from "@material-ui/core";
- import {useState} from 'react'
 
 import { useDropzone } from "react-dropzone";
 import { DeleteForever } from "@material-ui/icons";

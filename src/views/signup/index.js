@@ -7,6 +7,7 @@ import TemplateDefault from '../../templates/default'
 import useToasty from '../../../src/contexts/Toasty'
 import useStyles from './signup.styles'
 import { initialValues, validationSchema } from './formValues'
+import Api from '../../api/api.config'
 
 
 
@@ -16,7 +17,7 @@ const Signup = () => {
   const router = useHistory()
 
   const handleFormSubmit = async (values) =>{
-    const response = await axios.post('/api/users', values)
+    const response = await Api.post('/api/users', values)
     if(response.data.success) {
       setToasty({
         open: true,
