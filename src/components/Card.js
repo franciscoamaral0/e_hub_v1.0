@@ -4,8 +4,8 @@ import { makeStyles } from '@material-ui/core'
 const useStyles = makeStyles(() =>({
   
   sizeImage:{
-    paddingTop:'56%'
-  },
+    paddingTop:'56%',
+  }
 }))
 
 
@@ -15,7 +15,7 @@ const Card = ({image, title, subtitle, isButton}) =>{
   const classes = useStyles()
   return(
     <>
-    <CardMUI>
+    <CardMUI className={classes.fullCard}>
               <CardMedia
                 image={image}
                 title={title}

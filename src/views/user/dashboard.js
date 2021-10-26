@@ -133,7 +133,7 @@ const Dashboard = () => {
           <Typography component="h1" variant="h2" align="center">
             Meus Anuncios
           </Typography>
-          <Link to="/myaccount/publish">
+          <Link style={{textDecoration:'none'}}to="/myaccount/publish">
             <Button
               variant="contained"
               color="primary"
@@ -159,23 +159,28 @@ const Dashboard = () => {
               if(removedProducts.includes(element._id)) return null
               return (
               <Grid key={element._id} item xs={12} sm={6} md={4}>
+              <Link style={{textDecoration: 'none'}} to={`/product/${element._id}`}>
                 <Card
                   image={element.files[0]}
                   title={element.title}
                   subtitle={formatCurrency(element.price)}
                   isButton={
                     <>
-                    <Link to= {`/edit/${element._id}`}>
+                    <Link style={{textDecoration: 'none'}} to= {`/edit/${element._id}`}>
                       <Button size="small" color="primary">
                         Editar
                       </Button>
                       </Link>
+                      <Link style={{textDecoration: 'none'}} onClick={e => e.preventDefault()}>
                       <Button onClick={() => handleClickRemove(element._id)} size="small" color="primary">
                         Remover
                       </Button>
-                    </>
+                      </Link>
+                      </>
+                    
                   }
                 />
+                </Link>
               </Grid>
             )})}
           </Grid>

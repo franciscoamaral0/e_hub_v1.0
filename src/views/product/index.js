@@ -3,6 +3,10 @@ import { makeStyles } from '@material-ui/core'
 import Carousel from 'react-material-ui-carousel'
 
 import TemplateDefault from '../../templates/default'
+import Api from '../../api/api.config'
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from 'react'
+
 
 const useStyle= makeStyles((theme)=>({
   box:{
@@ -10,6 +14,7 @@ const useStyle= makeStyles((theme)=>({
     padding: theme.spacing(3),
     margin: theme.spacing(3),
   },
+  
   productName:{
     margin:'15px 0'
   },
@@ -27,15 +32,39 @@ const useStyle= makeStyles((theme)=>({
 
 
 
+
 const Product = () =>{
   const classes= useStyle()
+  const { id } = useParams();
+  const [ads, setAds] = useState([])
+  
+  
+  
+  const handleProduct = async () =>{
+  try {
+    const result = await Api.get('/ad-sale/my/search', {
+      params: {
+        id,
+      },
+    })
+    setAds(result.data)
+    console.log(result)
+  } catch (error) {
+    
+  }
+  }
+
+  console.log(ads)
+  useEffect(()=> {
+    handleProduct()
+  },[])
 
 
   return(
     <TemplateDefault>
-      <Container maxWidth='lg'>
-        <Grid container spacing={3}>
-          <Grid item xs={8} >
+      <Container maxWidth='lg' >
+        <Grid container spacing={3}  wrap={true}>
+          <Grid item xs={8}>
               <Box className={classes.box}>
                 <Carousel
                   autoPlay={false}
@@ -83,7 +112,7 @@ const Product = () =>{
             </Box>
           </Grid>
 
-          <Grid item xs={4} >
+          <Grid item xs={4}  >
             <Card elevation={0} className={classes.box}>
               <CardHeader
               avatar={

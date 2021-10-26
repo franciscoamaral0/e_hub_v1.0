@@ -6,8 +6,6 @@ import {
   Container,
   Select,
   Typography,
-  
-  
   FormControl,
   InputLabel,
   InputAdornment,
@@ -15,7 +13,7 @@ import {
   FormHelperText,
   Input,
   FormControlLabel,
-  Checkbox
+  Checkbox,
 } from "@material-ui/core";
 
 import useStyles from "./publish.styles";
@@ -23,7 +21,7 @@ import useStyles from "./publish.styles";
 import TemplateDefault from "../../../templates/default";
 import { useHistory } from "react-router";
 import { initialValues, validationSchema } from "./formValues";
-import FileUpload from '../../../components/FileUpload/index'
+import FileUpload from "../../../components/FileUpload/index";
 // import { useDropzone } from "react-dropzone";
 // import axios from "axios";
 import Api from "../../../api/api.config";
@@ -31,91 +29,87 @@ import useToasty from "../../../contexts/Toasty";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-const EditPublish = ({props}) => {
-  const router = useHistory()
+const EditPublish = ({ props }) => {
+  const router = useHistory();
   const classes = useStyles();
-  const setToasty = useToasty()
-  const {id} = useParams()
-  const [formValues, setFormValues] = useState(null)
-  
-  
+  const { setToasty } = useToasty();
+  const { id } = useParams();
+  const [formValues, setFormValues] = useState(null);
 
-
-  const handleSearchAd = async () =>{
-    
+  const handleSearchAd = async () => {
     try {
-      const result = await  Api.get('/ad-sale/my/search',{
+      const result = await Api.get("/ad-sale/my/search", {
         params: {
-          id
-       }}
-      )
+          id,
+        },
+      });
+      console.log(result)
       const savedValues = {
         title: result.data.title,
         category: result.data.category,
         description: result.data.description,
         price: result.data.price,
-        name: result.data.name, 
+        name: result.data.name,
         email: result.data.email,
         phone: result.data.phone,
         files: result.data.files,
         used: result.data.used,
         manufacturer: result.data.manufacturer,
-      }
-      setFormValues(savedValues)
-      
+      };
+      setFormValues(savedValues);
     } catch (error) {
       setToasty({
         open: true,
-        severity: 'error',
-        text: 'Erro ao editar anúncio!'
-      })
-      router.push('/myaccount')
+        severity: "error",
+        text: "Erro ao editar anúncio!",
+      });
+      router.push("/myaccount");
     }
-  }
+  };
 
-  // 
+  //
 
   useEffect(() => {
-    handleSearchAd()
-  }, [])
+    handleSearchAd();
+  }, []);
 
-  const handleSubmitForm = async (values) =>{
-      try {
-        const filesData = new FormData()
-        for(let key in values){
-          filesData.append(key, values[key])
-        }
-        filesData.delete('files')
-        values.files.forEach((element) => {
-          filesData.append('files', element)
-        })
-        console.log('teste', filesData.getAll('files'))
-        console.log('teste', filesData.getAll('title'))
-        
-        const send = await Api.put('/ad-sale/my/edit', filesData, {
-          params: {
-            id: id
-        }})
-        console.log(filesData)
-        console.log(send)
-        router.push('/myaccount')
-          setToasty({
-            open:true,
-            severity:'success',
-            text: 'Anúncio criado com sucesso!'
-          })
-      } catch (error) {
-          setToasty({
-            open:true,
-            severity:'error',
-            text: 'Erro ao criar anúncio, tente novamente!'
-          })
+  useEffect(() => {
+    console.log(formValues);
+  }, [formValues]);
+
+  const handleSubmitForm = async (values) => {
+    try {
+      const filesData = new FormData();
+      for (let key in values) {
+        filesData.append(key, values[key]);
       }
-    
-    
-  }
-  
-  
+      filesData.delete("files");
+      values.files.forEach((element) => {
+        filesData.append("files", element);
+      });
+      console.log("teste", filesData.getAll("files"));
+      console.log("teste", filesData.getAll("title"));
+
+      const send = await Api.put("/ad-sale/my/edit", filesData, {
+        params: {
+          id: id,
+        },
+      });
+      
+      setToasty({
+        open: true,
+        severity: "success",
+        text: "Anúncio editado com sucesso!",
+      });
+      router.push("/myaccount");
+    } catch (error) {
+      setToasty({
+        open: true,
+        severity: "error",
+        text: "Erro ao editar anúncio, tente novamente!",
+      });
+    }
+  };
 
   return (
     <TemplateDefault>
@@ -126,7 +120,6 @@ const EditPublish = ({props}) => {
         enableReinitialize
       >
         {({
-          
           touched,
           values,
           errors,
@@ -134,6 +127,7 @@ const EditPublish = ({props}) => {
           handleSubmit,
           setFieldValue,
         }) => {
+          console.log(values);
           return (
             <form onSubmit={handleSubmit}>
               <Container maxWidth="sm">
@@ -172,7 +166,10 @@ const EditPublish = ({props}) => {
 
                   <br />
                   <br />
-                  <FormControl error={errors.manufacturer && touched.manufacturer} fullWidth>
+                  <FormControl
+                    error={errors.manufacturer && touched.manufacturer}
+                    fullWidth
+                  >
                     <InputLabel className={classes.inputLabel}>
                       Fabricante*
                     </InputLabel>
@@ -235,11 +232,11 @@ const EditPublish = ({props}) => {
 
               <Container maxWidth="md" className={classes.boxContainer}>
                 <Box className={classes.box}>
-                  <FileUpload 
+                  <FileUpload
                     files={values.files}
                     errors={errors.files}
                     touched={touched.files}
-                    setFieldValue = {setFieldValue}
+                    setFieldValue={setFieldValue}
                   />
                 </Box>
               </Container>
@@ -272,11 +269,6 @@ const EditPublish = ({props}) => {
 
               <Container maxWidth="md" className={classes.boxContainer}>
                 <Box className={classes.box}>
-                  
-
-
-
-
                   <FormControl error={errors.price && touched.price} fullWidth>
                     <InputLabel className={classes.inputLabel}>
                       Preço*
@@ -295,11 +287,21 @@ const EditPublish = ({props}) => {
                     </FormHelperText>
                   </FormControl>
 
-
                   <FormControlLabel
-                    control={<Checkbox checked={values.used} onChange={handleChange} name="used"  color='primary'/>}
+                    control={
+                      <Checkbox
+                        checked={values.used}
+                        onChange={() => {
+                          setFieldValue("used", !values.used);
+                        }}
+                        name="used"
+                        color="primary"
+                      />
+                    }
                     label="Produto Usado?"
                   />
+                          
+                          
                 </Box>
               </Container>
 

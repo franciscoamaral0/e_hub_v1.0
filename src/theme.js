@@ -1,7 +1,7 @@
-import { createTheme } from '@material-ui/core/styles'
+import { createTheme, responsiveFontSizes } from '@material-ui/core/styles'
 
 
-const theme = createTheme ({
+let theme = createTheme ({
   palette: {
     primary: {
       main: '#002f34',
@@ -16,4 +16,7 @@ const theme = createTheme ({
     }
   }
 })
+
+
+// theme = responsiveFontSizes(theme);
 export default theme

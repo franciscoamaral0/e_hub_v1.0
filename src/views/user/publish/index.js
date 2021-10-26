@@ -1,4 +1,4 @@
-import { Formik } from "formik";
+import { Formik, Field } from "formik";
 
 import {
   Box,
@@ -49,9 +49,7 @@ const Publish = () => {
         values.files.forEach((element) => {
           filesData.append('files', element)
         })
-        console.log('teste', filesData.getAll('files'))
         const send = await Api.post('/ad-sale/new', filesData)
-        console.log(send)
         router.push('/myaccount')
           setToasty({
             open:true,
@@ -68,6 +66,7 @@ const Publish = () => {
     
     
   }
+  
 
   return (
     <TemplateDefault>
@@ -245,9 +244,17 @@ const Publish = () => {
                     </FormHelperText>
                   </FormControl>
 
-
                   <FormControlLabel
-                    control={<Checkbox checked={values.used} onChange={handleChange} name="used"  color='primary'/>}
+                    control={
+                      <Checkbox
+                        checked={values.used}
+                        onChange={() => {
+                          setFieldValue("used", !values.used);
+                        }}
+                        name="used"
+                        color="primary"
+                      />
+                    }
                     label="Produto Usado?"
                   />
                 </Box>
