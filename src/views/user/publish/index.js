@@ -154,7 +154,7 @@ const Publish = () => {
                       <MenuItem value="Agricultura">Agricultura</MenuItem>
                       <MenuItem value="Moda">Moda</MenuItem>
                       <MenuItem value="Carros,Motos e Barco">
-                        Carros,Motos e Barcos
+                        Carros, Motos e Barcos
                       </MenuItem>
                       <MenuItem value="Serviços">Serviços</MenuItem>
                       <MenuItem value="Lazer">Lazer</MenuItem>

@@ -22,8 +22,20 @@ const useStyles = makeStyles((theme) =>({
   loading:{
     display: 'block',
     margin: '10px auto'
+  },
+  loginMethodSeparator:{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e8e8e8',
+    width: '100%',
+    height: 1,
+    margin: theme.spacing(7,0,4),
+    '& span' : {
+      backgroundColor: 'white',
+      padding: '0 30px'
+    }
   }
-
 }))
 
 

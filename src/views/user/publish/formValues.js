@@ -2,7 +2,7 @@ import * as yup from "yup";
 
   const validationSchema = yup.object().shape({
     title: yup.string()
-      .min(6, "Por favor, insira um título com no mínimo 6 caracteres.")
+      .max(20, "Por favor, insira um título com no maximo 20 caracteres, utilize o campo de descrição para maiores informações.")
       .max(60, "Titulo com no maximo 60 caracteres.")
       .required("Campo Obrigatório."),
     category: yup.string()

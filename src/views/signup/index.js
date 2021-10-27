@@ -1,4 +1,4 @@
-import { Container, Typography, FormControl, InputLabel, Box, FormHelperText, Input, Button, CircularProgress } from '@material-ui/core'
+import { Divider ,Container, Typography, FormControl, InputLabel, Box, FormHelperText, Input, Button, CircularProgress } from '@material-ui/core'
 import { Formik } from 'formik'
 import axios from 'axios'
 import { useHistory } from 'react-router'
@@ -17,15 +17,25 @@ const Signup = () => {
   const router = useHistory()
 
   const handleFormSubmit = async (values) =>{
-    const response = await Api.post('/api/users', values)
-    if(response.data.success) {
+    console.log(values)
+    try {
+      const response = await Api.post('/signin', values)
+      console.log(response)
       setToasty({
         open: true,
         severity: 'success',
         text: 'Registo realizado com sucesso'
       })
-      router.push('/auth/signin')
+      router.push('/login')
+    } catch (error) {
+      console.log(error.response.data)
+      setToasty({
+        open: true,
+        severity: 'error',
+        text: `${error.response.data}`
+      })
     }
+    
     // vamos redirecionar user para pagina de login
   }
 
@@ -72,6 +82,20 @@ const Signup = () => {
                       </FormHelperText>
                     </FormControl>
 
+                    <FormControl fullWidth error={errors.cpf && touched.cpf} className={classes.formControl}>
+                      <InputLabel className={classes.inputLabel}>Cpf</InputLabel>
+                        <Input
+                          name='cpf'
+                          type='text'
+                          value={values.cpf}
+                          onChange={handleChange}
+                        />
+                        
+                      <FormHelperText>
+                        {errors.cpf && touched.cpf ? errors.cpf : null}
+                      </FormHelperText>
+                    </FormControl>
+
                     <FormControl fullWidth error={errors.email && touched.email} className={classes.formControl}>
                       <InputLabel className={classes.inputLabel}>E-Mail</InputLabel>
                         <Input
@@ -82,6 +106,19 @@ const Signup = () => {
                         
                       <FormHelperText>
                         {errors.email && touched.email ? errors.email : null}
+                      </FormHelperText>
+                    </FormControl>
+
+                    <FormControl fullWidth error={errors.username && touched.username} className={classes.formControl}>
+                      <InputLabel className={classes.inputLabel}>Nome de usuário</InputLabel>
+                        <Input
+                          name='username'
+                          value={values.username}
+                          onChange={handleChange}
+                        />
+                        
+                      <FormHelperText>
+                        {errors.username && touched.username ? errors.username : null}
                       </FormHelperText>
                     </FormControl>
 
@@ -113,19 +150,82 @@ const Signup = () => {
                       </FormHelperText>
                     </FormControl>
 
-                    <FormControl fullWidth error={errors.cep && touched.cep} className={classes.formControl}>
-                      <InputLabel className={classes.inputLabel}>Cep</InputLabel>
+                    <Box className={classes.loginMethodSeparator}>
+                      <span>Dados Cadastrais</span>
+                    </Box>
+
+                    <FormControl fullWidth error={errors.zipcode && touched.zipcode} className={classes.formControl}>
+                      <InputLabel className={classes.inputLabel}>Código Postal</InputLabel>
                         <Input
-                          name='cep'
+                          name='zipcode'
                           type='text'
-                          value={values.cep}
+                          value={values.zipcode}
                           onChange={handleChange}
                         />
                         
                       <FormHelperText>
-                        {errors.cep && touched.cep ? errors.cep : null}
+                        {errors.zipcode && touched.zipcode ? errors.zipcode : null}
                       </FormHelperText>
                     </FormControl>
+
+
+                    <FormControl fullWidth error={errors.street && touched.street} className={classes.formControl}>
+                      <InputLabel className={classes.inputLabel}>Rua</InputLabel>
+                        <Input
+                          name='street'
+                          type='text'
+                          value={values.street}
+                          onChange={handleChange}
+                        />
+                        
+                      <FormHelperText>
+                        {errors.street && touched.street ? errors.street : null}
+                      </FormHelperText>
+                    </FormControl>
+
+                    <FormControl fullWidth error={errors.number && touched.number} className={classes.formControl}>
+                      <InputLabel className={classes.inputLabel}>Número</InputLabel>
+                        <Input
+                          name='number'
+                          type='text'
+                          value={values.number}
+                          onChange={handleChange}
+                        />
+                        
+                      <FormHelperText>
+                        {errors.number && touched.number ? errors.number : null}
+                      </FormHelperText>
+                    </FormControl>
+
+                    <FormControl fullWidth error={errors.city && touched.city} className={classes.formControl}>
+                      <InputLabel className={classes.inputLabel}>Cidade</InputLabel>
+                        <Input
+                          name='city'
+                          type='text'
+                          value={values.city}
+                          onChange={handleChange}
+                        />
+                        
+                      <FormHelperText>
+                        {errors.city && touched.city ? errors.city : null}
+                      </FormHelperText>
+                    </FormControl>
+
+                    <FormControl fullWidth error={errors.district && touched.district} className={classes.formControl}>
+                      <InputLabel className={classes.inputLabel}>Estado</InputLabel>
+                        <Input
+                          name='district'
+                          type='text'
+                          value={values.district}
+                          onChange={handleChange}
+                        />
+                        
+                      <FormHelperText>
+                        {errors.district && touched.district ? errors.district : null}
+                      </FormHelperText>
+                    </FormControl>
+
+                    
 
                     {/* Precisa ainda ser adicionado no cadastro do usuario
                       "age": 21,

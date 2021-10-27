@@ -54,6 +54,7 @@ const Dashboard = () => {
   const handleSucess = () =>{
     setOpenConfirmModal(false)
     setRemovedProducts([...removedProducts, productId])
+    getAllAds()
     setToasty({
       open: true,
       severity: 'success',
