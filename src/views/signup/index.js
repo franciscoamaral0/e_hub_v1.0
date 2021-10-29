@@ -17,10 +17,10 @@ const Signup = () => {
   const router = useHistory()
 
   const handleFormSubmit = async (values) =>{
-    console.log(values)
+    
     try {
       const response = await Api.post('/signin', values)
-      console.log(response)
+      
       setToasty({
         open: true,
         severity: 'success',
@@ -28,7 +28,6 @@ const Signup = () => {
       })
       router.push('/login')
     } catch (error) {
-      console.log(error.response.data)
       setToasty({
         open: true,
         severity: 'error',

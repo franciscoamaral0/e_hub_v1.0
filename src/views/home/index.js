@@ -45,7 +45,7 @@ const Home =() =>{
     const result = await Api.get('/ad')
     setAds(result.data)
   }
-console.log(ads)
+
 
 useEffect(() => {
   handleHomeAds()

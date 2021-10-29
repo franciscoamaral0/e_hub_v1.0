@@ -21,7 +21,7 @@ const Example = ({ type, color }) => {
   
   return (
     
-    <Container  className={classes.backgroundContainer} maxWidth='mx' >
+    <Container  className={classes.backgroundContainer} maxWidth='lg' >
 
     <ReactLoading type={type} color={color} height={200} width={150} />
     </Container>
