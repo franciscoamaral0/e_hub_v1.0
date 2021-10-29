@@ -1,16 +1,16 @@
 import { Button, Container, Typography, Grid, Dialog, DialogActions,DialogTitle, DialogContent,DialogContentText } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import { useEffect, useState } from "react";
-// import { useHistory } from "react-router";
+
 import useToasty from "../../contexts/Toasty";
 
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import TemplateDefault from "../../templates/default";
 import Card from "../../components/Card";
 import Api from "../../api/api.config";
 import { formatCurrency } from "../../utils/currency";
-import EditPublish from "./publish/editPublish";
+
 
 const useStyles = makeStyles((theme) => ({
   buttonAdd: {

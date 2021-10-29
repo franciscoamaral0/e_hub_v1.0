@@ -24,7 +24,7 @@ import {useState, useContext, useEffect } from "react";
 
 import Logo from "../eHub_logo-removebg-preview.png";
 import Api from "../api/api.config";
-import Example from "./LoadingPage";
+
 
 import {Context} from '../contexts/AuthContext'
 
@@ -58,7 +58,7 @@ const Header = () => {
   const handleCloseModal = () => setOpenConfirmModal(false);
   const openUserMenu = Boolean(anchorUserMenu);
 
-  const userId = localStorage.getItem("userId");
+  
 
 
   const handleDataUser = async () => {
@@ -118,8 +118,10 @@ const Header = () => {
                 style={{ textDecoration: "none" }}
               >
                 <Button variant="outlined" color="secondary">
+                  {name ? 'Anunciar e Vender' : 'Login'
+
+                  }
                   
-                  Anunciar e Vender
                 </Button>
               </Link>
 

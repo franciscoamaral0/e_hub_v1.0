@@ -100,8 +100,8 @@ const Product = () => {
 
     <TemplateDefault>
       <Container maxWidth="lg">
-        <Grid container spacing={3} wrap={true}>
-          <Grid item xs={8}>
+        <Grid container spacing={4} >
+          <Grid item xs sm md>
             <Box className={classes.box}>
               <Carousel
                 autoPlay={false}
@@ -153,15 +153,16 @@ const Product = () => {
               <Typography component="h6" variant="h6">
                 Descrição
               </Typography>
-              <Typography component="p" variant="body2">
+              <Typography component="p" variant="body2" >
                 {ads.description}
               </Typography>
             </Box>
           </Grid>
 
-          <Grid item xs={4}>
-            <Card elevation={0} className={classes.box}>
+          <Grid item  xs sm md>
+            <Card style={{display:'flex', justifyContent:'center' }} elevation={0} className={classes.box}>
               <CardHeader
+                
                 avatar={<Avatar>T</Avatar>}
                 title={ads.name}
                 subheader={ads.email}

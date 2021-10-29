@@ -9,7 +9,7 @@ import * as yup from "yup";
       .required("Campo Obrigatório"),
     description: yup.string().required('Campo Obrigatório')
       .min(50, "Escreva uma descrição com no mínimo 50 caracteres")
-      .max(200, "Limite de 200 caracteres atingido"),
+      .max(1000, "Limite de 1000 caracteres atingido"),
     price: yup.number().required('Campo Obrigatório'),
     name: yup.string().required('Campo Obrigatório'),
     email: yup.string().email('Digite um e-mail válido').required('Campo Obrigatório'),

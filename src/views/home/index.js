@@ -59,7 +59,7 @@ useEffect(() => {
         </Typography>
         <Paper className={classes.searchBox}>
           <InputBase
-          onChange={(e) =>setSearch(e.target.value) }
+          onChange={(e) =>setSearch(e.target.value)}
           fullWidth
           placeholder='Ex.: Iphone 12 com garantia'/>
           <IconButton onClick={handleSubmitSearch}>

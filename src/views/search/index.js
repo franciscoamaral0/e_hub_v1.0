@@ -18,6 +18,7 @@ import Api from '../../api/api.config'
 import {formatCurrency} from '../../utils/currency'
 
 
+
 const useStyles = makeStyles((theme) => ({
   searchBox: {
     display: "flex",
@@ -43,23 +44,47 @@ const useStyles = makeStyles((theme) => ({
 
 const List = () => {
   const classes = useStyles();
-  const { query } = useParams();
-  const [wordSearch, setWordSearch] = useState([])
+  let { query } = useParams();
+  const [products, setProducts] = useState([])
+  const [searchWordPage, setSearchWordPage] = useState(query)
+  const [newSearchWord, setNewSearchWord] = useState(query)
 
   const handleSearch = async () =>{
-    const result = await Api.get(`/search?search=${query}`)
-    setWordSearch(result.data)
+    const result = await Api.get(`/search?search=${newSearchWord}`)
+    setProducts(result.data)
   }
+
+  const handleSearchPage = async () => {
+    setNewSearchWord(searchWordPage)
+
+    
+    
+  }
+
+//   const handleSubmitSearch = () =>{
+//     router.push({
+//       pathname: `/search/${searchWordPage}`
+//     })
+// }
+
   
   useEffect(() => {
     handleSearch()
-  }, [])
+  }, [newSearchWord])
+
+  // useEffect(() =>{
+  //   handleSearchPage()
+  // },[])
   return (
     <TemplateDefault>
       <Container maxWidth="md">
         <Paper className={classes.searchBox}>
-          <InputBase fullWidth placeholder="Ex.: Iphone 12 com garantia" />
-          <IconButton>
+          <InputBase
+            fullWidth
+            placeholder="Ex.: Iphone 12 com garantia" 
+            onChange={(e) => setSearchWordPage(e.target.value)}
+          />
+          <IconButton onClick={handleSearchPage}>
             <SerchIcon />
           </IconButton>
         </Paper>
@@ -71,12 +96,12 @@ const List = () => {
             Anúncios
           </Typography>
           <Typography component="div" variant="body2" color="textPrimary">
-            ENCONTRADOS {wordSearch.length} ANÚNCIOS PARA O TERMO {`"${query.toUpperCase()}"`}
+            ENCONTRADOS {products.length} ANÚNCIOS PARA O TERMO {`${newSearchWord.toUpperCase()}`}
           </Typography>
 
           <Grid container spacing={4} className={classes.gridContainer}>
           {
-            wordSearch.map(product =>(
+            products.map(product =>(
             <Grid key={product._id} item xs={12} sm={6} md={4}>
               <Link className={classes.linkTextDecoration} to={`/product/${product._id}`}>
                 
