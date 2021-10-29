@@ -1,9 +1,16 @@
 import { Container, IconButton, InputBase, Typography, Paper, Grid} from '@material-ui/core'
 import SerchIcon from '@material-ui/icons/Search'
-
 import { makeStyles } from '@material-ui/core'
+import {useState, useEffect} from 'react'
+import { useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
+import Api from '../../api/api.config'
 import TemplateDefault from '../../templates/default'
 import Card from '../../components/Card'
+import { formatCurrency } from "../../utils/currency";
+
+
 
 const useStyles = makeStyles((theme) => ({
   
@@ -16,13 +23,34 @@ const useStyles = makeStyles((theme) => ({
   cardGrid:{
     marginTop: 50
 
-  }
+  },
+  linkTextDecoration: {
+    textDecoration: "none",
+  },
 }))
 
 const Home =() =>{
   const classes = useStyles()
+  const [search, setSearch] = useState()
+  const router = useHistory()
+  const [ads, setAds] = useState([])
 
+  const handleSubmitSearch = () =>{
+      router.push({
+        pathname: `/search/${search}`
+      })
+  }
 
+  const handleHomeAds = async ()=>{
+    const result = await Api.get('/ad')
+    setAds(result.data)
+  }
+console.log(ads)
+
+useEffect(() => {
+  handleHomeAds()
+}, [])
+  
   return(
     <TemplateDefault>
       <Container maxWidth='md'>
@@ -30,8 +58,11 @@ const Home =() =>{
           O que deseja encontrar?
         </Typography>
         <Paper className={classes.searchBox}>
-          <InputBase fullWidth placeholder='Ex.: Iphone 12 com garantia'/>
-          <IconButton>
+          <InputBase
+          onChange={(e) =>setSearch(e.target.value) }
+          fullWidth
+          placeholder='Ex.: Iphone 12 com garantia'/>
+          <IconButton onClick={handleSubmitSearch}>
             <SerchIcon/>
           </IconButton>
         </Paper>
@@ -43,13 +74,19 @@ const Home =() =>{
         </Typography>
         <br/>
         <Grid container spacing={4}>
+        {
+          ads.map(product =>(
         <Grid item xs={12} sm={6} md={4}>
+        <Link className={classes.linkTextDecoration} to={`/product/${product._id}`}>
         <Card
-            image={'https://source.unsplash.com/random'}
-            title='produto X'
-            subtitle='€60,00'
+            image={product.files[0]}
+            title={product.title.charAt(0).toUpperCase()+ product.title.substring(1)}
+            subtitle={formatCurrency(product.price)}
             />
+        </Link>
           </Grid>
+          ))
+        }
         </Grid>
       </Container>
 

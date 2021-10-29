@@ -1,6 +1,8 @@
 import { Box, Container, Grid, Typography } from '@material-ui/core'
 
 import { makeStyles } from '@material-ui/core'
+import { Link } from 'react-router-dom'
+import About from '../views/about'
 
 const useStyles = makeStyles((theme) => ({
   footer:{
@@ -41,7 +43,9 @@ export const Footer = () => {
 
         <Grid item xs={6} sm={3}>
           <Box textAlign='center'>
+            <Link style={{textDecoration:'none'}} to='/about'>
             <Typography color='textSecondary' variant='subtitle1'>Sobre</Typography>
+            </Link>
           </Box>
         </Grid>
       </Grid>

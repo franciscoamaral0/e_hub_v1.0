@@ -21,6 +21,12 @@ const useStyles = makeStyles((theme) => ({
   gridContainer: {
     marginTop: 10,
   },
+  linkNoUnderline: {
+    textDecoration: 'none'
+  },
+  changeFirstLetter :{
+    textTransform: 'capitalize'
+  }
 }));
 
 const Dashboard = () => {
@@ -160,19 +166,20 @@ const Dashboard = () => {
               if(removedProducts.includes(element._id)) return null
               return (
               <Grid key={element._id} item xs={12} sm={6} md={4}>
-              <Link style={{textDecoration: 'none'}} to={`/product/${element._id}`}>
+              <Link className={classes.linkNoUnderline} to={`/product/${element._id}`}>
                 <Card
+                  className={classes.changeFirstLetter}
                   image={element.files[0]}
-                  title={element.title}
+                  title={element.title.charAt(0).toUpperCase()+ element.title.substring(1)}
                   subtitle={formatCurrency(element.price)}
                   isButton={
                     <>
-                    <Link style={{textDecoration: 'none'}} to= {`/edit/${element._id}`}>
+                    <Link className={classes.linkNoUnderline} to= {`/edit/${element._id}`}>
                       <Button size="small" color="primary">
                         Editar
                       </Button>
                       </Link>
-                      <Link style={{textDecoration: 'none'}} onClick={e => e.preventDefault()}>
+                      <Link className={classes.linkNoUnderline} onClick={e => e.preventDefault()}>
                       <Button onClick={() => handleClickRemove(element._id)} size="small" color="primary">
                         Remover
                       </Button>

@@ -20,6 +20,8 @@ import { useState, useEffect } from "react";
 import { FunctionDate } from "../../utils/date";
 import { WhatsApp } from "@material-ui/icons";
 import { Redirect } from "react-router-dom";
+import Example from "../../components/LoadingPage";
+import { firstLetterUpper } from "../../utils/fistLetterUpper";
 
 const useStyle = makeStyles((theme) => ({
   box: {
@@ -53,6 +55,7 @@ const Product = () => {
   const day = date.getDate();
   const month = date.getMonth();
   const year = date.getFullYear();
+  const [title, setTitle] = useState('-')
 
   console.log(FunctionDate(month));
 
@@ -63,12 +66,18 @@ const Product = () => {
           id,
         },
       });
+      if(!data) return <Example type={'spinningBubbles'} color={'#000000'}/>
       setAds(data);
       setPhotos(data.files);
+      const upperTitle = firstLetterUpper(data.title)
+      
+      setTitle(upperTitle)
     } catch (error) {
 
     }
   };
+
+  
 
   console.log(ads);
 
@@ -99,6 +108,7 @@ const Product = () => {
               >
                 {photos.map((element) => (
                   <Card className={classes.card}>
+
                     <CardMedia
                       className={classes.cardMedia}
                       image={element}
@@ -113,13 +123,17 @@ const Product = () => {
               <Typography component="span" variant="caption">
                 Publicado {day} de {FunctionDate(month)} de {year}
               </Typography>
+              {
+                ads &&
               <Typography
                 component="h4"
                 variant="h4"
                 className={classes.productName}
               >
-                {ads.title}
+                {title}
               </Typography>
+
+              }
               <Typography
                 component="h4"
                 variant="h4"

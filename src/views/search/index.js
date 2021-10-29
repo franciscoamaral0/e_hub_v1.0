@@ -1,3 +1,4 @@
+import { Link, useParams } from "react-router-dom";
 import {
   Box,
   Container,
@@ -10,8 +11,12 @@ import {
 import SerchIcon from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core";
 
-import TemplateDefault from "../../src/templates/Default";
-import Card from "../../src/components/Card";
+import TemplateDefault from "../../templates/default";
+import Card from "../../components/Card";
+import {useState, useEffect} from 'react'
+import Api from '../../api/api.config'
+import {formatCurrency} from '../../utils/currency'
+
 
 const useStyles = makeStyles((theme) => ({
   searchBox: {
@@ -31,10 +36,24 @@ const useStyles = makeStyles((theme) => ({
   gridContainer: {
     marginTop: theme.spacing(2),
   },
+  linkTextDecoration: {
+    textDecoration: "none",
+  },
 }));
 
 const List = () => {
   const classes = useStyles();
+  const { query } = useParams();
+  const [wordSearch, setWordSearch] = useState([])
+
+  const handleSearch = async () =>{
+    const result = await Api.get(`/search?search=${query}`)
+    setWordSearch(result.data)
+  }
+  
+  useEffect(() => {
+    handleSearch()
+  }, [])
   return (
     <TemplateDefault>
       <Container maxWidth="md">
@@ -52,31 +71,22 @@ const List = () => {
             Anúncios
           </Typography>
           <Typography component="div" variant="body2" color="textPrimary">
-            ENCONTRADOS 200 ANÚNCIOS
+            ENCONTRADOS {wordSearch.length} ANÚNCIOS PARA O TERMO {`"${query.toUpperCase()}"`}
           </Typography>
 
           <Grid container spacing={4} className={classes.gridContainer}>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card
-                image={"https://source.unsplash.com/random"}
-                title="produto X"
-                subtitle="€60,00"
-              />
+          {
+            wordSearch.map(product =>(
+            <Grid key={product._id} item xs={12} sm={6} md={4}>
+              <Link className={classes.linkTextDecoration} to={`/product/${product._id}`}>
+                
+                  <Card image={product.files[0]} title={product.title.charAt(0).toUpperCase()+ product.title.substring(1)} subtitle={formatCurrency(product.price)} />
+                
+              </Link>
             </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card
-                image={"https://source.unsplash.com/random"}
-                title="produto X"
-                subtitle="€60,00"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card
-                image={"https://source.unsplash.com/random"}
-                title="produto X"
-                subtitle="€60,00"
-              />
-            </Grid>
+
+            ))
+          }
           </Grid>
         </Box>
       </Container>
