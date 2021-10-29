@@ -123,7 +123,7 @@ const Dashboard = () => {
           <DialogTitle>Deseja realmente apagar este anúncio</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Ao confirmar essa operação, nao sera possível reverter
+              Ao confirmar essa operação, não será possível reverter.
             </DialogContentText>
           </DialogContent>
           <DialogActions>

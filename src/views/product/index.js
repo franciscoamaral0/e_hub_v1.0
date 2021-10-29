@@ -22,6 +22,8 @@ import { FunctionDate } from "../../utils/date";
 import { WhatsApp } from "@material-ui/icons";
 import Example from "../../components/LoadingPage";
 import { firstLetterUpper } from "../../utils/fistLetterUpper";
+import { MailTo } from "../../utils/mailTo";
+import { formatCurrency } from "../../utils/currency";
 
 const useStyle = makeStyles((theme) => ({
   box: {
@@ -143,7 +145,7 @@ const Product = () => {
                 component="h4"
                 variant="h4"
                 className={classes.price}
-              >{`€${ads.price}`}</Typography>
+              >{formatCurrency(ads.price)}</Typography>
               <Chip label={ads.category} />
             </Box>
 
@@ -164,10 +166,12 @@ const Product = () => {
                 title={ads.name}
                 subheader={ads.email}
               />
+              
             </Card>
+            
             <Box className={classes.box}>
               <Typography component="h6" variant="h6" align="center">
-                Localizacao
+                Localização
               </Typography>
               {
                 ads.userID &&
@@ -189,6 +193,7 @@ const Product = () => {
                     handleWhatsappClick(ads.phone);
                   }}
                 />
+                
               </Typography>
             </Box>
           </Grid>

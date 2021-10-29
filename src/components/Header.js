@@ -19,11 +19,12 @@ import { makeStyles } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
 
 import { Link } from "react-router-dom";
-import {useState, useContext } from "react";
+import {useState, useContext, useEffect } from "react";
 
 
 import Logo from "../eHub_logo-removebg-preview.png";
 import Api from "../api/api.config";
+import Example from "./LoadingPage";
 
 import {Context} from '../contexts/AuthContext'
 
@@ -62,11 +63,17 @@ const Header = () => {
 
   const handleDataUser = async () => {
     const result = await Api.get("/my-account");
+
     const name = result.data[0].name;
+    
     setName(name);
   };
 
-  handleDataUser();
+
+  useEffect(() => {
+    handleDataUser()
+  }, [])
+  ;
 
   // const handleConfirmLogout = () => {
   //   localStorage.clear()
@@ -81,6 +88,7 @@ const Header = () => {
   
 
   return (
+
     <>
     <Dialog open={openConfirmModal} onClose={handleCloseModal}>
         <DialogTitle>Deseja realmente deslogar?</DialogTitle>

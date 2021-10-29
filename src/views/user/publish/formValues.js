@@ -2,8 +2,8 @@ import * as yup from "yup";
 
   const validationSchema = yup.object().shape({
     title: yup.string()
-      .min(10, "Por favor, insira um título com no mínimo 10 caracteres, utilize o campo de descrição para maiores informações.")
-      .max(60, "Titulo com no maximo 60 caracteres.")
+      .min(10, "Por favor, insira um título com no mínimo 10 caracteres. ")
+      .max(18, "Titulo com no maximo 19 caracteres, utilize o campo de descrição para maiores informações.")
       .required("Campo Obrigatório."),
     category: yup.string()
       .required("Campo Obrigatório"),
