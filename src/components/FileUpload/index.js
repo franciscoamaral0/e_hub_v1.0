@@ -16,7 +16,7 @@ const FileUpload = ({files, errors, touched, setFieldValue}) => {
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFile) => {
-      console.log(acceptedFile);
+      
       // console.log(URL.createObjectURL({path: "https://res.cloudinary.com/doumlt9gb/image/upload/v1635006767/Ehub/nyvjahb4ysr5uorjpvqp.jpg", type:'image/jpeg'}))
       const newFiles = acceptedFile.map((file) => Object.assign(file, {
         preview: URL.createObjectURL(file)
@@ -26,7 +26,7 @@ const FileUpload = ({files, errors, touched, setFieldValue}) => {
   });
 
   const handleRemoveFile = (fileName) => {
-    console.log(fileName,files)
+    
     const newFileState = files.filter((file) => file.name !== fileName);
     setFieldValue("files", newFileState);
   };

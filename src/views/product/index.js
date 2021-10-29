@@ -9,6 +9,7 @@ import {
   Container,
   Grid,
   Typography,
+  CircularProgress,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 import Carousel from "react-material-ui-carousel";
@@ -19,7 +20,6 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FunctionDate } from "../../utils/date";
 import { WhatsApp } from "@material-ui/icons";
-import { Redirect } from "react-router-dom";
 import Example from "../../components/LoadingPage";
 import { firstLetterUpper } from "../../utils/fistLetterUpper";
 
@@ -50,14 +50,13 @@ const Product = () => {
   const { id } = useParams();
   const [ads, setAds] = useState({});
   const [photos, setPhotos] = useState([]);
-  const [userData, setUserData] = useState({});
   const date = new Date();
   const day = date.getDate();
   const month = date.getMonth();
   const year = date.getFullYear();
-  const [title, setTitle] = useState('-')
+  const [title, setTitle] = useState('')
 
-  console.log(FunctionDate(month));
+  
 
   const handleProduct = async () => {
     try {
@@ -66,7 +65,7 @@ const Product = () => {
           id,
         },
       });
-      if(!data) return <Example type={'spinningBubbles'} color={'#000000'}/>
+      
       setAds(data);
       setPhotos(data.files);
       const upperTitle = firstLetterUpper(data.title)
@@ -79,7 +78,7 @@ const Product = () => {
 
   
 
-  console.log(ads);
+  
 
   const handleWhatsappClick = (value) => {
     window.open(`https://api.whatsapp.com/send?phone=+351${value}`, "_blank");
@@ -89,6 +88,13 @@ const Product = () => {
   }, []);
 
   return (
+
+    
+      !ads.title ? <Example type={'spinningBubbles'} color={'#000000'}/> : 
+    
+      (
+
+
 
     <TemplateDefault>
       <Container maxWidth="lg">
@@ -112,7 +118,7 @@ const Product = () => {
                     <CardMedia
                       className={classes.cardMedia}
                       image={element}
-                      title={ads.title}
+                      title={ads.title }
                     />
                   </Card>
                 ))}
@@ -123,8 +129,7 @@ const Product = () => {
               <Typography component="span" variant="caption">
                 Publicado {day} de {FunctionDate(month)} de {year}
               </Typography>
-              {
-                ads &&
+              
               <Typography
                 component="h4"
                 variant="h4"
@@ -133,7 +138,7 @@ const Product = () => {
                 {title}
               </Typography>
 
-              }
+              
               <Typography
                 component="h4"
                 variant="h4"
@@ -190,6 +195,10 @@ const Product = () => {
         </Grid>
       </Container>
     </TemplateDefault>
+    )
+    
+    
+    
   );
 };
 

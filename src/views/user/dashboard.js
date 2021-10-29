@@ -83,7 +83,7 @@ const Dashboard = () => {
       const result = await Api.get("/ad-sale/my/all");
       setAds(result.data);
     } catch (error) {
-      console.log(error.message);
+      
       setToasty({
         open:true,
         severity:'error',

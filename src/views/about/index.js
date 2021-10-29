@@ -3,7 +3,7 @@ import TemplateDefault from "../../templates/default";
 import { makeStyles } from "@material-ui/core";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import GitHubIcon from "@material-ui/icons/GitHub";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   boxContainer: {

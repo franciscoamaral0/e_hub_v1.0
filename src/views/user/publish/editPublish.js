@@ -43,7 +43,7 @@ const EditPublish = ({ props }) => {
           id,
         },
       });
-      console.log(result)
+      
       const savedValues = {
         title: result.data.title,
         category: result.data.category,
@@ -74,7 +74,7 @@ const EditPublish = ({ props }) => {
   }, []);
 
   useEffect(() => {
-    console.log(formValues);
+    
   }, [formValues]);
 
   const handleSubmitForm = async (values) => {
@@ -87,8 +87,7 @@ const EditPublish = ({ props }) => {
       values.files.forEach((element) => {
         filesData.append("files", element);
       });
-      console.log("teste", filesData.getAll("files"));
-      console.log("teste", filesData.getAll("title"));
+      
 
       const send = await Api.put("/ad-sale/my/edit", filesData, {
         params: {
@@ -127,7 +126,7 @@ const EditPublish = ({ props }) => {
           handleSubmit,
           setFieldValue,
         }) => {
-          console.log(values);
+          
           return (
             <form onSubmit={handleSubmit}>
               <Container maxWidth="sm">
@@ -357,7 +356,7 @@ const EditPublish = ({ props }) => {
               <Container maxWidth="md" className={classes.boxContainer}>
                 <Box textAlign="right">
                   <Button type="submit" variant="contained" color="primary">
-                    Publicar Anúncio
+                    Editar Anúncio
                   </Button>
                 </Box>
               </Container>
