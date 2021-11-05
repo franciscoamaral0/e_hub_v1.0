@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# E-Hub
+---
+- [Deploy](https://e-hub-v1.herokuapp.com/).
+- [Git-API](https://github.com/thsc47/E-Hub_API).
+---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
